@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./App.css";
 import Header from "./Components/Header";
+import PostCodeInput from "./Components/PostCodeInput";
+import AddressInput from "./Components/AddressInput";
+
 function App() {
   const [postCode, setPostCode] = useState("");
   const [address, setAddress] = useState("");
@@ -23,16 +26,16 @@ function App() {
       return;
     }
 
-    const url =`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+    const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
     <>
       <div>
-        <Header/>
+        <Header />
       </div>
-      <div>
+      {/* <div>
         <h2>郵便番号を入力</h2>
         <input
           placeholder="郵便番号を入力してください"
@@ -40,14 +43,25 @@ function App() {
           value={postCode}
         />
         <button onClick={searchAddress}>検索</button>
-      </div>
+      </div> */}
+      <PostCodeInput
+        postCode={postCode}
+        setPostCode={setPostCode}
+        searchAddress={searchAddress}
+      />
       <div>
-        <h2>住所</h2>
+        {/* <h2>住所</h2>
         <input value={address} onChange={(e) => setAddress(e.target.value)} />
-        <button onClick={showMap}>地図で表示する</button>
+        <button onClick={showMap}>地図で表示する</button> */}
         {/* <p>{address}</p> */}
         {/* <p>{postCode}</p> */}
+        <AddressInput
+          address={address}
+          setAddress={setAddress}
+          showMap={showMap}
+        />
       </div>
+      
     </>
   );
 }
